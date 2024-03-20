@@ -1,0 +1,150 @@
+{% extends 'users/base.html' %}
+{% block content %}
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary" style="background-color: brown; color: antiquewhite;">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Toggle button -->
+        <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                <img
+                    src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                    height="15"
+                    alt="MDB Logo"
+                    loading="lazy"
+                />
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" style=" color: aliceblue;" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style=" color: aliceblue;" href="#">Team</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style=" color: aliceblue;" href="#">Projects</a>
+                </li>
+            </ul>
+            <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+            <!-- Icon -->
+            <a class="link-secondary me-3" href="#">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+
+            <!-- Notifications -->
+            <div class="dropdown">
+                <a
+                    data-mdb-dropdown-init
+                    class="link-secondary me-3 dropdown-toggle hidden-arrow"
+                    href="#"
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    aria-expanded="false"
+                >
+                    <i class="fas fa-bell" style=" background-color: aliceblue;"></i>
+                    <span class="badge rounded-pill badge-notification bg-danger" style=" color: aliceblue;"> 1</span>
+                </a>
+                <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuLink"
+                >
+                    <li>
+                        <a class="dropdown-item" href="#">Some news</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Another news</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Avatar -->
+            <div class="dropdown">
+                <a
+                    data-mdb-dropdown-init
+                    class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                    href="#"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    aria-expanded="false"
+                >
+                    <img
+                        style=" color: aliceblue;"
+                        src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                        class="rounded-circle"
+                        height="25"
+                        alt="Black and White Portrait of a Man"
+                        loading="lazy"
+                    />
+                </a>
+            </div>
+            <!-- Spacer -->
+            <div class="mx-3"></div>
+            <!-- Logout button -->
+            <div>
+                <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+        <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+
+{% if request.user.is_applicant %}
+
+<section class="py-5">
+    <div class="container">
+        <div class="p-5 mb-4 bg-light rounded-3 text-center">
+            <h1 class="display-4 fw-bold">Welcome to Django Jobs</h1>
+            <p class="fs-5">Applicant Dashboard</p>
+        </div>
+    </div>
+</section>
+
+{% elif request.user.is_recruiter %}
+{% if not request.user.has_company %}
+
+ <!-- Alert Message for Recruiters without a Company -->
+ <div class="alert alert-danger text-center" role="alert">
+    <strong>You are seeing this because you have not created any company. Create one now! <a href="{% url 'update_company' %}">Here</a></strong>
+</div>
+<!-- End Alert Message -->
+{% endif %}
+ <!-- Section for Recruiter Dashboard -->
+ <section class="py-5">
+    <div class="container">
+        <div class="p-5 mb-4 bg-light rounded-3 text-center">
+            <h1 class="display-4 fw-bold">Welcome to Django Jobs</h1>
+            <p class="fs-5">Recruiter Dashboard</p>
+        </div>
+    </div>
+</section>
+<!-- End Section for Recruiter Dashboard -->
+{% endif %}
+
+
+{% endblock %}
