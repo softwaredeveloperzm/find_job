@@ -1,0 +1,84 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<section id="applied_jobs" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Applied Jobs</h2>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Job Title</th>
+                                        <th scope="col">Job Location</th>
+                                        <th scope="col">Job Type</th>
+                                        <th scope="col">Industry</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Cyber Security Analyst</td>
+                                        <td>Ndola</td>
+                                        <td>Onsite</td>
+                                        <td>Health</td>
+                                        <td>Pending</td>
+                                    </tr>
+                                    <!-- Add more rows as needed -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--
+<div class="card mx-auto mt-4" style="width: 78rem;">
+    <div class="card-body pt-3"> 
+        <h4 class="card-title mb-3 text-bold">Manage Jobs</h4>
+        <div class="table-responsive">
+            {% if jobs %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Job Title</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Job Type</th>
+                            <th scope="col">Industry</th>
+                            <th scope="col">Salary (K)</th>
+                            <th scope="col">View Job</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in jobs %}
+                            <tr>
+                                <td>{{ job.job.title }}</td>
+                                <td>{{ job.job.state }}</td>
+                                <td>{{ job.job.job_type }}</td>
+                                <td>{{ job.job.industry }}</td>
+                                <td>K {{ job.job.salary }}</td>
+                            
+                                <td style="text-decoration: none;"  ><a href="{% url 'job_details' job.job.pk %}" class="">View Applicants</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No jobs available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+-->
+
+
+{% endblock %}

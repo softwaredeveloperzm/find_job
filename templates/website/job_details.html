@@ -1,0 +1,43 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<!--
+
+<div class="container mt-5">
+    <section>
+        <div class="card job-details-card" style="background-color: #6082B6;"   style="margin-top: 200px;">
+            <div class="card-body">
+                <h2 class="card-title text-white">{{ job.title }}</h2>
+                <p class="card-text text-white">{{ job.location }} | K{{ job.salary }}</p>
+                {% if request.user.is_authenticated %}
+                    {% if has_applied == False %}
+                        <a href="{% url 'apply_to_job' job.pk %}" class="btn btn-primary btn-lg" type="button">Apply Now</a>
+                    {% else %}
+                        <p><span class="text-danger">You have already applied for this job</span></p>
+                    {% endif %}
+                {% else %}
+                    {% if has_applied %}
+                        <p><span class="text-warning">You have already applied for this job. Please <a href="{% url 'login' %}">log in</a> if you want to apply for more jobs.</span></p>
+                    {% else %}
+                        <p><span class="text-warning">Please <a href="{% url 'login' %}">log in</a> to apply for this job</span></p>
+                    {% endif %}
+                {% endif %}
+                
+                <div class="bg-light p-3 mt-3">
+                    <h5 class="fw-bold">Job Requirements</h5>
+                    <p>{{ job.requirements }}</p>
+                </div>
+                
+                <div class="bg-light p-3 mt-3">
+                    <h5 class="fw-bold">Everyday Responsibilities</h5>
+                    <p>{{ job.ideal_candidate }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+-->
+
+{% endblock %}

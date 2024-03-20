@@ -1,0 +1,52 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" style="margin-top: 50px;">
+        {{ message }}
+    </div>
+{% endfor %}
+{% endif %}
+
+{% if request.user.is_applicant %}
+{% if not request.user.has_resume %}
+
+ <!-- Alert Message for applicant without a Resume -->
+ <div class="alert alert-danger text-center" role="alert" style="margin-top: 50px;">
+    <strong>You are seeing this because you have not created any Resume. Create one now! <a href="{% url 'update-resume' %}">Here</a></strong>
+</div>
+<!-- End Alert Message -->
+{% endif %}
+<section class="py-5">
+    <div class="container" >
+        <div class="p-5 mb-4 rounded-3 text-center" style="background-color: #6082B6;">
+            <h1 class="display-4 fw-bold text-light">Welcome to Django Jobs</h1>
+            <p class="fs-5 text-light">Applicant Dashboard</p>
+        </div>
+    </div>
+</section>
+
+{% elif request.user.is_recruiter %}
+{% if not request.user.has_company %}
+
+ <!-- Alert Message for Recruiters without a Company -->
+ <div class="alert alert-danger text-center" role="alert" style="margin-top: 50px;">
+    <strong>You are seeing this because you have not created any company. Create one now! <a href="{% url 'update-company' %}">Here</a></strong>
+</div>
+<!-- End Alert Message -->
+{% endif %}
+ <!-- Section for Recruiter Dashboard -->
+ <section class="py-5">
+    <div class="container" style="margin-top: 50px;">
+        <div class="p-5 mb-4 bg-light rounded-3 text-center">
+            <h1 class="display-4 fw-bold">Welcome to Django Jobs</h1>
+            <p class="fs-5">Recruiter Dashboard</p>
+        </div>
+    </div>
+</section>
+<!-- End Section for Recruiter Dashboard -->
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start">
+      <div class="container">
+        <div class="row gx-lg-5 align-items-center justify-content-center">  <!-- Added justify-content-center class -->
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card text-white" style="margin-top: 100px; background-color: #6082B6;">
+              <div class="card-body py-5 px-md-5">
+                <form method="POST" action="{% url 'register_recruiter' %}">
+                    {% csrf_token %}
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" name="email" id="form3Example3" class="form-control" />
+                        <label class="form-label" for="form3Example3">Email address</label>
+                    </div>
+                
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" name="password1" id="form3Example4" class="form-control" />
+                        <label class="form-label" for="form3Example4">Password</label>
+                    </div>
+                
+                    <!-- Confirm Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" name="password2" id="form3Example5" class="form-control" />
+                        <label class="form-label" for="form3Example5">Confirm Password</label>
+                    </div>
+                
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4">
+                        Sign up
+                    </button>
+                
+                  
+                    <p>Already have an account? <a href="{% url 'login' %}" class="link-info">Login</a></p>
+                </form>
+                {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+{% endblock %}

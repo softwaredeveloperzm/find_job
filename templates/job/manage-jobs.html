@@ -1,0 +1,72 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<section>
+    <div class="container my-5">
+        {% if jobs %}
+        <div class="card" style="margin-top: 100px; background-color: #6082B6;">
+            <div class="card-body">
+               
+                <h2 class="card-title text-white mb-4">Jobs &amp; Applicants</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover bg-light">
+                      
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Job Title</th>
+                                <th scope="col">Salary (K)</th>
+                                <th scope="col">No. of Applicants</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job in jobs %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ job.title }}</td>
+                                <td>{{ job.salary }}</td>
+                                <td>{{ job.applications.all.count }} <a class="text-decoration-none" href="{% url 'all_applicants' pk=job.pk %}">View</a> </td> 
+                                {% if job.is_available %}
+                                <td><span class="badge bg-success">Active</span></td>
+                                {% else %}
+                                    <td><span class="badge bg-warning">Not Active</span></td>
+                                {% endif %}
+                                <td>
+                                    <form method="POST" action="{% url 'manage_job' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="job_id" value="{{ job.id }}">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="submit" type="checkbox" id="toggleSwitch{{ job.id }}" name="toggle_job" {% if job.is_available %}checked{% endif %}>
+                                           
+                                        </div>
+                                       
+                                    </form>
+                                </td> 
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+          
+                </div>
+    
+            </div>
+    
+    
+        </div>
+    </div>
+</section>
+
+
+<section>
+    {% else %}
+    <div class="text-light" style="margin-top: 100px;" >
+        <p class="text-center">No jobs applications available.</p>
+    </div>
+</section>
+
+
+{% endif %}
+
+{% endblock %}

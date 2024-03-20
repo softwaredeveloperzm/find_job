@@ -1,0 +1,80 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <section>
+        <div class="p-5 mb-5  rounded-3 text-center" style="background-color: #6082B6; margin-top: 100px;">
+            <div class="container-fluid py-5">
+                <h2 class="display-5 fw-bold text-light">Django Jobs</h2>
+                <p class="col-md-8 fs-5 mt-3 text-light">Explore available job opportunities</p>
+            </div>
+        </div>
+    </section>
+
+<!-- First row -->
+<div class="row my-5 align-items-center justify-content-center">
+    {% if filter %}
+        {% for job in filter.qs %}
+            <div class="col-8 col-lg-4 col-xl-3">
+                <!-- Card -->
+                <div class="card h-100 border-0">
+                    <div class="card-body d-flex flex-column text-center py-4">
+                        <h4 class="card-title">{{ job.state }}</h4>
+                        <p class="lead card-subtitle">{{ job.title }}</p>
+                        <p class="display-5 my-4 text-primary fw-bold">K{{ job.salary }}</p>
+                        <p class="card-text mx-5 text-muted d-none d-lg-block text-md-start">
+                            {{ job.requirements }}
+                        </p>
+                    </div>
+                    <a href="{% url 'job_details' pk=job.pk %}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                </div>
+                <!-- Add space between rows -->
+                <div class="mb-5"></div>
+                <!-- Open a new row -->
+                <div class="row my-5 align-items-center justify-content-center">
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+
+<!--
+   <section id="jobs" class="mt-5">
+        <div class="container-lg">
+            <div class="row" >
+                {% if filter %}
+                    {% for job in filter.qs %}
+                        <div class="col-12 col-md-4 mb-4">
+                            <div class="card border-primary border-2" style="background-color: #6082B6; margin-top: 50px;">
+                                <div class="card-header text-center text-light" style=" background-color: #4C516D;">Most popular</div>
+                                <div class="card-body text-center py-5">
+                                    <h4 class="card-title text-light">Complete Edition</h4>
+                                    <p class="lead card-subtitle text-light">eBook download & all updates</p>
+                                    <p class="display-4 my-4 text-light fw-bold">K182.44</p>
+                                    <p class="card-text mx-5  d-none d-lg-block text-light">
+                                        HTML is the standard markup language for Web pages. With HTML you can create your own Website. HTML is easy to learn - You will enjoy it!
+                                    </p>
+                                    <a href="#" class="btn  btn-lg mt-3 text-light" style="background-color: #4C516D;">Buy</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">No jobs available</h5>
+                                <p class="card-text">Check back later for more opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div> 
+        </div> 
+    </section>
+-->
+ 
+</div>
+{% endblock %}

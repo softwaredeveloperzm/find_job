@@ -1,0 +1,102 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<section>
+    <div class="container my-5">
+        <div class="card" style="margin-top: 100px; background-color: #6082B6;">
+            <div class="card-body">
+                <h2 class="card-title text-white mb-4">Applicants</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover bg-light">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Surname</th>
+                                <th scope="col">Job Title</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Applied Date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Resume</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        {% for applicant, info in applicant_data %}
+                        <tr>
+                        
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ info.first_name }}</td>
+                            <td>{{ info.surname }}</td>
+                            <td>{{ applicant.job.title }}</td>
+                            <td>{{ applicant.job.state }}</td>
+                            <td>{{ applicant.timestamp }}</td>
+                            <td>{{ applicant.status }}</td>
+                            <td>
+                                {% if info.resume_url %}
+                                    <a href=" {{ info.resume_url }}" target="_blank">Download Resume</a>
+                                {% else %}
+                                    No resume uploaded
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!--
+<div class="card mx-auto mt-4" style="width: 78rem;">
+    <div class="card-body pt-3">
+        <h4 class="card-title mb-3 text-bold">All applicants for {{ job.title }} Position</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Applied Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Resume</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for applicant, info in applicant_data %}
+                    <tr>
+                        <td>{{ info.first_name }}</td>
+                        <td>{{ info.surname }}</td>
+                        <td>{{ applicant.job.title }}</td>
+                        <td>{{ applicant.job.state }}</td>
+                        <td>{{ applicant.timestamp }}</td>
+                        <td>{{ applicant.status }}</td>
+                        <td>
+                            {% if info.resume_url %}
+                                <a href=" {{ info.resume_url }}" target="_blank">Download Resume</a>
+                            {% else %}
+                                No resume uploaded
+                            {% endif %}
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
+
+-->
+
+{% endblock %}

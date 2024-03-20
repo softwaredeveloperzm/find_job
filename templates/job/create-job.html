@@ -1,0 +1,77 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="container text-white"  >
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6" style="margin-top: 100px;  background-color: #6082B6;">
+            <form method="post">
+                {% csrf_token %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <div class="mb-3">
+                    <label class="form-label" for="id_title">Job Title</label>
+                    {{ form.title }}
+                    <div class="form-text text-white">Enter the job title.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="id_location">Location</label>
+                    {{ form.city }}
+                    <div class="form-text text-white">Enter the city where the job is located.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="id_state">State</label>
+                    {{ form.state }}
+                    <div class="form-text text-white">Enter the state where the job is located.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="id_industry">Industry</label>
+                    {{ form.industry }}
+                    <div class="form-text text-white">Select the industry of the job.</div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body" style="background-color: #6082B6;">
+                        <div class="mb-3">
+                            <label class="form-label" for="id_job_type">Job Type</label>
+                            <select name="job_type" id="id_job_type" class="form-select">
+                                {% for choice in form.job_type.field.choices %}
+                                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text text-white">Select the type of job.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="id_salary">Salary</label>
+                            {{ form.salary }}
+                            <div class="form-text text-white">Enter the salary for the job.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="id_requirements">Requirements</label>
+                            {{ form.requirements }}
+                            <div class="form-text text-white">Enter the requirements for the job.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="id_ideal_candidate">Ideal Candidate</label>
+                            {{ form.ideal_candidate }}
+                            <div class="form-text text-white">Enter the description of the ideal candidate.</div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="id_is_available" name="is_available" checked>
+                            <label class="form-check-label" for="id_is_available">Is Available</label>
+                            <div class="form-text text-white">Check if the job is currently available.</div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
